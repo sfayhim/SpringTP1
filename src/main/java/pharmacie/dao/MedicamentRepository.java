@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import pharmacie.entity.Medicament;
 
@@ -21,4 +23,24 @@ public interface MedicamentRepository extends JpaRepository<Medicament, Integer>
      * @return la liste des médicaments disponibles
      */
     List<Medicament> findByIndisponibleFalse();
+    
+    /**
+     * Requête diapo 51 : Trouve les médicaments d'une catégorie donnée
+     * dont le stock est inférieur au niveau de réapprovisionnement
+     * @param categorieCode le code de la catégorie
+     * @return la liste des médicaments à réapprovisionner
+     */
+    @Query("SELECT m FROM Medicament m WHERE m.categorie.code = :categorieCode AND m.unitesEnStock < m.niveauDeReappro")
+    List<Medicament> findMedicamentsAReapprovisionner(@Param("categorieCode") Integer categorieCode);
+    
+    /**
+     * Trouve tous les médicaments disponibles à la commande pour une catégorie donnée
+     * Un médicament est disponible si :
+     * - il n'est pas indisponible (indisponible = false)
+     * - son stock (unitesEnStock) >= quantité en commande (unitesCommandees)
+     * @param categorieCode le code de la catégorie
+     * @return la liste des médicaments disponibles
+     */
+    @Query("SELECT m FROM Medicament m WHERE m.categorie.code = :categorieCode AND m.indisponible = false AND m.unitesEnStock >= m.unitesCommandees")
+    List<Medicament> findMedicamentsDisponiblesCommande(@Param("categorieCode") Integer categorieCode);
 }

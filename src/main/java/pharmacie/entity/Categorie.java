@@ -28,8 +28,8 @@ public class Categorie {
 	private String description;
 
 	@ToString.Exclude
-	// CascadeType.ALL signifie que toutes les opérations CRUD sur la catégorie sont également appliquées à ses médicaments
-	@OneToMany(cascade = {CascadeType.ALL}, mappedBy = "categorie")
+	// On ne cascade pas la suppression : si la catégorie a des médicaments, la suppression sera refusée par la contrainte FK
+	@OneToMany(mappedBy = "categorie")
 	private List<Medicament> medicaments = new LinkedList<>();
 
 }
