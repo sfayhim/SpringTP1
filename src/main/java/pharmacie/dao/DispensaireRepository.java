@@ -4,7 +4,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
-import pharmacie.entity.Categorie;
 import pharmacie.entity.Dispensaire;
 
 
@@ -16,5 +15,12 @@ import pharmacie.entity.Dispensaire;
  */
 @Repository
 public interface DispensaireRepository extends JpaRepository<Dispensaire, Integer> {
+    
+    /**
+     * Trouve tous les dispensaires dans une région donnée
+     * @param region la région à rechercher
+     * @return la liste des dispensaires dans cette région
+     */
+    List<Dispensaire> findByRegion(String region);
 
 }

@@ -31,3 +31,35 @@ INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, 
 INSERT INTO MEDICAMENT (NOM, CATEGORIE_CODE, QUANTITE_PAR_UNITE, PRIX_UNITAIRE, UNITES_EN_STOCK, UNITES_COMMANDEES, NIVEAU_DE_REAPPRO, INDISPONIBLE, imageURL) VALUES
 ('Lévofloxacine 500mg', 3, 'Boîte de 7 comprimés', 15.80, 160, 0, 18, true, 'https://images.unsplash.com/photo-1628771065518-0d82f1938462?w=400'),
 ('Clindamycine 300mg', 3, 'Boîte de 16 gélules', 13.20, 140, 0, 16, true, 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=400');
+
+
+-- Insertion des dispensaires (Etablissements de santé)
+INSERT INTO DISPENSAIRE (CODE, NOM, CONTACT, FONCTION, ADRESSE, CODE_POSTAL, VILLE, REGION, PAYS, TELEPHONE, FAX) VALUES
+(DEFAULT, 'Centre de Santé Nord', 'Dr. Martin Dubois', 'Directeur', '12 Avenue des Hôpitaux', '75018', 'Paris', 'Île-de-France', 'France', '01.45.67.89.01', '01.45.67.89.02'),
+(DEFAULT, 'Dispensaire Sud', 'Dr. Sophie Laurent', 'Responsable', '45 Rue de la Santé', '13001', 'Marseille', 'PACA', 'France', '04.91.23.45.67', '04.91.23.45.68'),
+(DEFAULT, 'Clinique de l''Est', 'Dr. Pierre Bernard', 'Chef de service', '8 Boulevard Médical', '67000', 'Strasbourg', 'Grand Est', 'France', '03.88.12.34.56', '03.88.12.34.57'),
+(DEFAULT, 'Centre Hospitalier Ouest', 'Dr. Marie Petit', 'Directrice', '23 Rue des Soins', '44000', 'Nantes', 'Pays de la Loire', 'France', '02.40.11.22.33', '02.40.11.22.34'),
+(DEFAULT, 'Dispensaire Central', 'Dr. Jean Moreau', 'Pharmacien chef', '67 Avenue Centrale', '69001', 'Lyon', 'Auvergne-Rhône-Alpes', 'France', '04.78.90.12.34', '04.78.90.12.35');
+
+
+-- Insertion des commandes
+INSERT INTO COMMANDE (NUMERO, SAISIELE, ENVOYELE, PORT, REMISE, DESTINATAIRE, ADRESSE, CODE_POSTAL, VILLE, REGION, PAYS, DISPENSAIRE_CODE) VALUES
+(DEFAULT, PARSEDATETIME('2026-01-15', 'yyyy-MM-dd'), PARSEDATETIME('2026-01-20', 'yyyy-MM-dd'), 15.50, 5.00, 'Centre de Santé Nord', '12 Avenue des Hôpitaux', '75018', 'Paris', 'Île-de-France', 'France', 1),
+(DEFAULT, PARSEDATETIME('2026-01-25', 'yyyy-MM-dd'), NULL, 18.00, 10.00, 'Dispensaire Sud', '45 Rue de la Santé', '13001', 'Marseille', 'PACA', 'France', 2),
+(DEFAULT, PARSEDATETIME('2026-02-01', 'yyyy-MM-dd'), PARSEDATETIME('2026-02-05', 'yyyy-MM-dd'), 12.00, 0.00, 'Clinique de l''Est', '8 Boulevard Médical', '67000', 'Strasbourg', 'Grand Est', 'France', 3),
+(DEFAULT, PARSEDATETIME('2026-02-08', 'yyyy-MM-dd'), NULL, 20.00, 15.00, 'Centre Hospitalier Ouest', '23 Rue des Soins', '44000', 'Nantes', 'Pays de la Loire', 'France', 4),
+(DEFAULT, PARSEDATETIME('2026-02-10', 'yyyy-MM-dd'), NULL, 16.50, 8.00, 'Dispensaire Central', '67 Avenue Centrale', '69001', 'Lyon', 'Auvergne-Rhône-Alpes', 'France', 5);
+
+
+-- Insertion des lignes de commande (détails des commandes)
+INSERT INTO LIGNE (ID, QUANTITE, COMMANDE_NUMERO, MEDICAMENT_REFERENCE) VALUES
+(DEFAULT, 50, 1, 1),  -- 50 Morphine pour Commande 1
+(DEFAULT, 100, 1, 2), -- 100 Doliprane pour Commande 1
+(DEFAULT, 75, 1, 4),  -- 75 Étodolac pour Commande 1
+(DEFAULT, 80, 2, 2),  -- 80 Doliprane pour Commande 2
+(DEFAULT, 60, 2, 3),  -- 60 Efferalgan pour Commande 2
+(DEFAULT, 40, 3, 5),  -- 40 Flurbiprofène pour Commande 3
+(DEFAULT, 90, 3, 2),  -- 90 Doliprane pour Commande 3
+(DEFAULT, 30, 4, 1),  -- 30 Morphine pour Commande 4
+(DEFAULT, 120, 4, 2), -- 120 Doliprane pour Commande 4
+(DEFAULT, 45, 5, 4);  -- 45 Étodolac pour Commande 5

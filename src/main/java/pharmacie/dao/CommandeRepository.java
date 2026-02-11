@@ -1,12 +1,11 @@
 package pharmacie.dao;
 
+import java.util.Date;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;
-import pharmacie.entity.Categorie;
 import pharmacie.entity.Commande;
-import pharmacie.entity.Dispensaire;
 
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called ProductCodeRepository
@@ -17,5 +16,12 @@ import pharmacie.entity.Dispensaire;
  */
 @Repository
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
+    
+    /**
+     * Trouve toutes les commandes saisies après une date donnée
+     * @param date la date à partir de laquelle rechercher
+     * @return la liste des commandes saisies après cette date
+     */
+    List<Commande> findBySaisieleAfter(Date date);
 
 }

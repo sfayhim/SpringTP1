@@ -1,10 +1,7 @@
 package pharmacie.entity;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
@@ -18,9 +15,10 @@ public class Ligne {
     private Integer id;
 
     @ToString.Exclude
+    @Positive
     @Size(max = 255)
     @Column(length = 255)
-    private String quantite;
+    private Integer quantite;
 
     @ManyToOne(optional = false)
     @NonNull

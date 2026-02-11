@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import lombok.*;
@@ -14,7 +13,6 @@ import lombok.*;
 @Getter
 @Setter
 @NoArgsConstructor
-@RequiredArgsConstructor
 @ToString
 public class Dispensaire {
     @Id
@@ -30,8 +28,8 @@ public class Dispensaire {
     @Column(length = 15)
     private String pays;
 
-    @Size(max = 15)
-    @Column(length = 15)
+    @Size(max = 30)
+    @Column(length = 30)
     private String region;
 
     @Size(max = 15)
@@ -65,8 +63,8 @@ public class Dispensaire {
 
 
     @ToString.Exclude
-    // CascadeType.ALL signifie que toutes les opérations CRUD sur la catégorie sont également appliquées à ses médicaments
-    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "commande")
+    // CascadeType.ALL signifie que toutes les opérations CRUD sur le dispensaire sont également appliquées à ses commandes
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "dispensaire")
     private List<Commande> commandes = new LinkedList<>();
 }
 

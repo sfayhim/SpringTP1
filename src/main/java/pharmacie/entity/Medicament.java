@@ -5,6 +5,8 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.ArrayList;
 
 @Entity
 @Getter @Setter @NoArgsConstructor @RequiredArgsConstructor @ToString
@@ -43,7 +45,7 @@ public class Medicament {
 
 	/**
 	 * Niveau de reapprovisionnement
-	 * Si le stock devient inférieur ou égal à ce niveau, 
+	 * Si le stock devient inférieur ou égal à ce niveau,
 	 * on doit approvisionner de nouvelles unités de ce médicament auprès d'un fournisseur
 	 */
 	@ToString.Exclude
@@ -64,5 +66,12 @@ public class Medicament {
 	@ToString.Exclude
 
 	private Categorie categorie ;
+
+    @OneToMany(
+        mappedBy = "medicament",
+        cascade = CascadeType.ALL,
+        orphanRemoval = true
+    )
+    private List<Ligne> lignes = new ArrayList<>();
 
 }
