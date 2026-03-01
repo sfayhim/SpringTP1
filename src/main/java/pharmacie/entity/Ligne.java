@@ -16,8 +16,7 @@ public class Ligne {
 
     @ToString.Exclude
     @Positive
-    @Size(max = 255)
-    @Column(length = 255)
+    @Column()
     private Integer quantite;
 
     @ManyToOne(optional = false)

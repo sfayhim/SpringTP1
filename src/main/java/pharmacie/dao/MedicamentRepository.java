@@ -7,10 +7,12 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import pharmacie.entity.Medicament;
 
 // Cette interface sera auto-implémentée par Spring
+@Repository
 public interface MedicamentRepository extends JpaRepository<Medicament, Integer> {
     /**
      * Trouve un médicament à partir de son nom (unique dans Medicament)

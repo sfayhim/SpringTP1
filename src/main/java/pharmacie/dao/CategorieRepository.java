@@ -2,6 +2,7 @@ package pharmacie.dao;
 
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import pharmacie.entity.Categorie;
 
@@ -12,7 +13,7 @@ import pharmacie.entity.Categorie;
 /**
  * Un repository avec des méthodes de recherche spécifiques, auto-implémentées par Spring
  */
-
+@Repository
 public interface CategorieRepository extends JpaRepository<Categorie, Integer> {
 	/**
 	 * Recherche une catégorie par son libellé (unique)
